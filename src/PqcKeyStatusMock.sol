@@ -17,6 +17,11 @@ contract PqcKeyStatusMock {
         entries[account] = Entry(true, 1, pubkey, possessionProven); // 1 = ML-DSA-87
     }
 
+    /// Register with an explicit algorithm id (to test contracts that must reject non-ML-DSA-87 keys).
+    function setKeyWithAlgorithm(address account, bytes calldata pubkey, uint8 algorithmId, bool possessionProven) external {
+        entries[account] = Entry(true, algorithmId, pubkey, possessionProven);
+    }
+
     function clearKey(address account) external {
         delete entries[account];
     }

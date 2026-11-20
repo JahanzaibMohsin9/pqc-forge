@@ -15,6 +15,9 @@ import {IPqcVerify, IPqcKeyStatus, PQC_VERIFY, PQC_KEY_STATUS} from "./IQorePQC.
 ///  - Messages use the QoreSign message-signing-v1 domain:
 ///    "qorechain-msg-v1|" + cosmosChainId + "|" + data
 ///    so the bytes are exactly what QoreX `signArbitrary` signs, and can't be replayed as a tx.
+///  - INTEGRATORS: never wrap these calls in try/catch and treat a revert as "invalid signature" (or as
+///    valid). A relayer can starve a precompile call of gas (63/64 rule) to force a revert; reverting the
+///    whole transaction is the only safe outcome.
 library PQSig {
     uint8 internal constant ALG_MLDSA87 = 1;
 

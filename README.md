@@ -69,7 +69,7 @@ Speed: about 90 ms per real verification through ffi (Node start-up dominates).
 
 ## Develop
 ```sh
-npm ci && forge test        # 17 tests, including the official FIPS-204 vectors
+npm ci && forge test        # 19 tests, including the official FIPS-204 vectors
 node ffi/live-parity.mjs    # compare with the live testnet precompile
 ```
 

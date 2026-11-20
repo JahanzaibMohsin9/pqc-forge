@@ -11,7 +11,8 @@ import {MLDSA87_PUBKEY_LEN, MLDSA87_SIG_LEN} from "./IQorePQC.sol";
 ///         - non-canonical ABI input     -> revert
 ///         - wrong key / signature size  -> false
 ///         - empty message               -> false (FIPS-204 accepts it; the chain does not)
-/// @dev Install with PqcForge.installPqc(). Requires `ffi = true`.
+/// @dev Install with PqcForge.installPqc(). Requires `ffi = true`. Test-only deviation: the mock also answers
+///      pqcForgeConfigure / pqcForgeFfiPath (configuration hooks) which the real precompile would reject.
 contract PqcVerifyMock {
     Vm private constant vm = Vm(address(uint160(uint256(keccak256("hevm cheat code")))));
     bytes4 private constant SELECTOR = 0xf52bde0a; // pqcVerify(bytes,bytes,bytes)

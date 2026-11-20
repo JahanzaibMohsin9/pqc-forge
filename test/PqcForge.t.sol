@@ -140,6 +140,21 @@ contract PqcForgeTest is Test, PqcForge {
         harness.registeredKey(alice);
     }
 
+    function test_pqsig_rejectsNonMlDsa87Algorithm() public {
+        address alice = makeAddr("alice");
+        pqcRegisterWithAlgorithm(alice, key.publicKey, 2, true); // e.g. a KEM key id, not ML-DSA-87
+        vm.expectRevert(abi.encodeWithSelector(PQSig.PqcUnsupportedAlgorithm.selector, alice, uint8(2)));
+        harness.registeredKey(alice);
+    }
+
+    function test_pqsig_mainnetChainIdDomain() public {
+        address alice = makeAddr("alice");
+        pqcRegister(alice, key.publicKey, true);
+        vm.chainId(9801); // qorechain-vladi
+        bytes memory sig = pqcSign(key, bytes.concat("qorechain-msg-v1|qorechain-vladi|", message));
+        assertTrue(harness.verifyMessageBy(alice, message, sig));
+    }
+
     function test_pqsig_requiresRegistration() public {
         address bob = makeAddr("bob");
         vm.expectRevert(abi.encodeWithSelector(PQSig.PqcKeyNotRegistered.selector, bob));

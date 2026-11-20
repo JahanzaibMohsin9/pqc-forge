@@ -66,6 +66,11 @@ abstract contract PqcForge {
         PqcKeyStatusMock(PQC_KEY_STATUS).setKey(account, pubkey, possessionProven);
     }
 
+    /// Register `pubkey` for `account` under an explicit algorithm id.
+    function pqcRegisterWithAlgorithm(address account, bytes memory pubkey, uint8 algorithmId, bool possessionProven) internal {
+        PqcKeyStatusMock(PQC_KEY_STATUS).setKeyWithAlgorithm(account, pubkey, algorithmId, possessionProven);
+    }
+
     /// Generate, register (with possession proven) and return a key for `account`.
     function pqcRegisterNew(address account, bytes32 seed) internal returns (PqcKey memory k) {
         k = pqcKeygen(seed);
