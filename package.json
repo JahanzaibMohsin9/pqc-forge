@@ -1,0 +1,17 @@
+{
+  "name": "pqc-forge",
+  "version": "0.1.0",
+  "description": "Foundry test kit for QoreChain's ML-DSA-87 precompiles: real FIPS-204 verification, live-chain behaviour, fail-closed PQSig library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "private": "true",
+  "dependencies": {
+    "@qorechain/pqc": "^0.2.3"
+  }
+}
